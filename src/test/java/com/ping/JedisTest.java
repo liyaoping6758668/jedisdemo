@@ -2,6 +2,7 @@ package com.ping;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -68,6 +69,23 @@ public class JedisTest {
 		//2.操作redis
 		jedis.sadd("set1", "a1","a2");
 		System.out.println(jedis.srandmember("set1", 2));
+		//3.关闭redis
+		jedis.close();
+	}
+	
+	/**
+	 * 5.数据类型sortSet
+	 */
+	@Test
+	public void testJedisSortSet() {
+		//1.连接redis
+		Jedis jedis = new Jedis("127.0.0.1",6379);
+		//2.操作redis
+		jedis.zadd("zset1", 10, "liyaoping");
+		jedis.zadd("zset1", 30, "pangzi");
+		jedis.zadd("zset1", 20, "linyuting");
+		Set<String> zrange = jedis.zrange("zset1", 0, -1);
+		System.out.println(zrange);
 		//3.关闭redis
 		jedis.close();
 	}
