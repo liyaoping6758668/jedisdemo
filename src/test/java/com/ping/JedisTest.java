@@ -58,4 +58,18 @@ public class JedisTest {
 		jedis.close();
 	}
 	
+	/**
+	 * 4.数据类型set
+	 */
+	@Test
+	public void testJedisSet() {
+		//1.连接redis
+		Jedis jedis = new Jedis("127.0.0.1",6379);
+		//2.操作redis
+		jedis.sadd("set1", "a1","a2");
+		System.out.println(jedis.srandmember("set1", 2));
+		//3.关闭redis
+		jedis.close();
+	}
+	
 }
